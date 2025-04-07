@@ -29,8 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (inputAxisX != 0 || inputAxisZ != 0)
         {
-            velocity.x = Mathf.MoveTowards(velocity.x, inputAxisX * moveSpeed, moveSpeed * Time.deltaTime);
-            velocity.z = Mathf.MoveTowards(velocity.z, inputAxisZ * moveSpeed, moveSpeed * Time.deltaTime);
+            velocity.x = Mathf.MoveTowards(velocity.x, inputAxisX * moveSpeed, moveSpeed);
+            velocity.z = Mathf.MoveTowards(velocity.z, inputAxisZ * moveSpeed, moveSpeed);
         }
         else
         {
