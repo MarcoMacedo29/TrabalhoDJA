@@ -3,42 +3,42 @@ using System.Collections;
 
 public class RouletteSpin : MonoBehaviour
 {
-    public float spinSpeed = 200f;  // A velocidade com que a roleta gira
-    private bool isSpinning = false;  // Para evitar que a roleta gire várias vezes ao clicar várias vezes
-    private float rotationAngle = 0f;  // O ângulo atual da roleta
+    public float spinSpeed = 200f;  
+    private bool isSpinning = false; 
+    private float rotationAngle = 0f;  
 
-    // Função que é chamada ao pressionar o botão de "Spin"
+
     public void StartSpin()
     {
-        if (!isSpinning)  // Impede múltiplos giros simultâneos
+        if (!isSpinning)  
         {
             isSpinning = true;
-            rotationAngle = 0f;  // Reseta o ângulo da roleta
+            rotationAngle = 0f;  
             StartCoroutine(SpinRoulette());
         }
     }
 
-    // Corrotina para girar a roleta
+
     private IEnumerator SpinRoulette()
     {
-        float spinDuration = 3f;  // Tempo que a roleta vai girar (3 segundos)
+        float spinDuration = 3f;  
         float timeElapsed = 0f;
 
-        // Enquanto o tempo total de rotação não for alcançado
+
         while (timeElapsed < spinDuration)
         {
-            // Cada frame, a roleta gira por uma quantidade de ângulo
+
             float angleThisFrame = spinSpeed * Time.deltaTime;
             rotationAngle += angleThisFrame;
-            transform.Rotate(0f, 0f, angleThisFrame);  // Rotaciona no eixo Z (para o 2D)
+            transform.Rotate(0f, 0f, angleThisFrame);  
 
             timeElapsed += Time.deltaTime;
-            yield return null;  // Espera um frame
+            yield return null;  
         }
 
-        // Após o giro, podemos definir o estado de "parado"
+        
         isSpinning = false;
 
-        // Aqui você pode adicionar lógica para determinar o prêmio ou efeito da roleta.
+        
     }
 }
