@@ -656,6 +656,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4121395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4121395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.r
+      value: 0.85660374
+      objectReference: {fileID: 0}
     - target: {fileID: 8714755521023002109, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
       propertyPath: m_LocalPosition.x
       value: 38.1
@@ -717,6 +729,18 @@ PrefabInstance:
     - target: {fileID: 1023000339583794499, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
       propertyPath: m_Name
       value: Floor (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4121395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4121395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.r
+      value: 0.85660374
       objectReference: {fileID: 0}
     - target: {fileID: 8714755521023002109, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
       propertyPath: m_LocalPosition.x
@@ -966,6 +990,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4121395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4121395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.r
+      value: 0.85660374
+      objectReference: {fileID: 0}
     - target: {fileID: 8714755521023002109, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
       propertyPath: m_LocalPosition.x
       value: 63.56
@@ -1121,6 +1157,18 @@ PrefabInstance:
     - target: {fileID: 1023000339583794499, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
       propertyPath: m_Name
       value: Floor (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4121395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4121395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.r
+      value: 0.85660374
       objectReference: {fileID: 0}
     - target: {fileID: 8714755521023002109, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1302,6 +1350,18 @@ PrefabInstance:
     - target: {fileID: 1023000339583794499, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
       propertyPath: m_Name
       value: Floor (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4121395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4121395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.r
+      value: 0.85660374
       objectReference: {fileID: 0}
     - target: {fileID: 8714755521023002109, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1615,6 +1675,18 @@ PrefabInstance:
     - target: {fileID: 1023000339583794499, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
       propertyPath: m_Name
       value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4121395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4121395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537618092470668277, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
+      propertyPath: m_Color.r
+      value: 0.85660374
       objectReference: {fileID: 0}
     - target: {fileID: 8714755521023002109, guid: d8279f91ecd8c7b43b8e0965e3a0c194, type: 3}
       propertyPath: m_LocalPosition.x
