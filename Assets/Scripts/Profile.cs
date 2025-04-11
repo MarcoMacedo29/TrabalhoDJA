@@ -1,10 +1,15 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class Profile : MonoBehaviour
 {
     public GameObject PlayerStatusCanvas;
     public GameObject inventoryCanvas;
+    public CanvasGroup bottomBarCanvasGroup; 
+    public float fadeDuration = 0.5f;
+    public float fadeDelay = 1f;
+    private Coroutine fadeCoroutine;
 
     private void Start()
     {
@@ -13,6 +18,9 @@ public class Profile : MonoBehaviour
 
         if (inventoryCanvas != null)
             inventoryCanvas.SetActive(false);
+
+        if (bottomBarCanvasGroup != null)
+            bottomBarCanvasGroup.alpha = 1; 
     }
 
     private void Update()
@@ -57,5 +65,40 @@ public class Profile : MonoBehaviour
     {
         inventoryCanvas.SetActive(false);
         PlayerStatusCanvas.SetActive(false);
+    }
+
+    public void OnMouseEnterBottomBar()
+    {
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
+        fadeCoroutine = StartCoroutine(FadeCanvasGroup(bottomBarCanvasGroup, 1, fadeDuration));
+    }
+
+    public void OnMouseExitBottomBar()
+    {
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
+        fadeCoroutine = StartCoroutine(HideBottomBarAfterDelay());
+    }
+
+    private IEnumerator HideBottomBarAfterDelay()
+    {
+        yield return new WaitForSeconds(fadeDelay);
+        yield return StartCoroutine(FadeCanvasGroup(bottomBarCanvasGroup, 0, fadeDuration));
+    }
+
+    private IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float targetAlpha, float duration)
+    {
+        float startAlpha = canvasGroup.alpha;
+        float time = 0;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
+            yield return null;
+        }
+
+        canvasGroup.alpha = targetAlpha;
     }
 }
