@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 15ee6868d0f909f48836e33ec2afe4f0
+guid: 305aa72c87f0ad241a228c927921c522
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7081323658920820905
-    second: InventoryProfile_0
+      213: -2340434018717992648
+    second: BlueCoin Gif_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: InventoryProfile_0
+      name: BlueCoin Gif_0
       rect:
         serializedVersion: 2
-        x: 94
-        y: 89
-        width: 70
-        height: 70
+        x: 2
+        y: 0
+        width: 12
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 75f747296a51abd90800000000000000
-      internalID: -7081323658920820905
+      spriteID: 839f21ef8ab158fd0800000000000000
+      internalID: -2340434018717992648
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      InventoryProfile_0: -7081323658920820905
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
