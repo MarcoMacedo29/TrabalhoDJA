@@ -2353,6 +2353,7 @@ GameObject:
   - component: {fileID: 1789216119}
   - component: {fileID: 1789216118}
   - component: {fileID: 1789216122}
+  - component: {fileID: 1789216123}
   m_Layer: 5
   m_Name: BottomBar
   m_TagString: Untagged
@@ -2457,6 +2458,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerStatusCanvas: {fileID: 2097481982}
   inventoryCanvas: {fileID: 1179943756}
+  bottomBarCanvasGroup: {fileID: 1867203405}
+  fadeDuration: 1
+  fadeDelay: 1
+--- !u!114 &1789216123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789216117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1789216122}
+          m_TargetAssemblyTypeName: Profile, Assembly-CSharp
+          m_MethodName: OnMouseEnterBottomBar
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1789216122}
+          m_TargetAssemblyTypeName: Profile, Assembly-CSharp
+          m_MethodName: OnMouseExitBottomBar
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1816982279
 GameObject:
   m_ObjectHideFlags: 0
@@ -2499,6 +2548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867203404}
+  - component: {fileID: 1867203405}
   m_Layer: 5
   m_Name: Profile
   m_TagString: Untagged
@@ -2527,6 +2577,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 184, y: 90}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!225 &1867203405
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867203403}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1961060969
 PrefabInstance:
   m_ObjectHideFlags: 0
