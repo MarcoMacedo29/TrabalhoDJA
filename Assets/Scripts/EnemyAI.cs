@@ -19,7 +19,7 @@ public class EnemyAI : MonoBehaviour
         if (target == null) return;
 
         Vector3 direction = (target.position - transform.position).normalized;
-        direction.y = 0; 
+        direction.y = 0;
 
         transform.position += direction * speed * Time.deltaTime;
     }
