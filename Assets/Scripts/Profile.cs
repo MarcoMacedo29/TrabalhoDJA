@@ -1,26 +1,61 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Profile : MonoBehaviour
 {
-    public Button profileInventoryButton;
-    public Button profilePlayerButton;
-    public InventoryUI inventory;
-    public ProfilePlayerStatus playerstatus;
+    public GameObject PlayerStatusCanvas;
+    public GameObject inventoryCanvas;
 
-    public void Start()
+    private void Start()
     {
-        profileInventoryButton.onClick.AddListener(OpenInventory);
-        profilePlayerButton.onClick.AddListener(OpenPlayerStatus);
+        if (PlayerStatusCanvas != null)
+            PlayerStatusCanvas.SetActive(false);
+
+        if (inventoryCanvas != null)
+            inventoryCanvas.SetActive(false);
     }
 
-    public void OpenInventory()
+    private void Update()
     {
-        inventory.ToggleInventory(); 
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!IsPointerOverUI())
+            {
+                CloseAllCanvases();
+            }
+        }
     }
 
-    public void OpenPlayerStatus()
+    public void ToggleInventory()
     {
-        playerstatus.TogglePlayerStatus();
+        bool isInventoryOpen = inventoryCanvas.activeSelf;
+        inventoryCanvas.SetActive(!isInventoryOpen);
+
+        if (!isInventoryOpen && PlayerStatusCanvas.activeSelf)
+        {
+            PlayerStatusCanvas.SetActive(false);
+        }
+    }
+
+    public void TogglePlayerStatus()
+    {
+        bool isPlayerStatusOpen = PlayerStatusCanvas.activeSelf;
+        PlayerStatusCanvas.SetActive(!isPlayerStatusOpen);
+
+        if (!isPlayerStatusOpen && inventoryCanvas.activeSelf)
+        {
+            inventoryCanvas.SetActive(false);
+        }
+    }
+
+    private bool IsPointerOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
+    }
+
+    private void CloseAllCanvases()
+    {
+        inventoryCanvas.SetActive(false);
+        PlayerStatusCanvas.SetActive(false);
     }
 }
