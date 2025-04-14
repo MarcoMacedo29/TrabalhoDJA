@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerStatus : MonoBehaviour
 {
     public Slider slider;
+    public TMP_Text healthText;
 
     public int MaxHealth = 100;
     public int currentHealth;
@@ -15,7 +17,8 @@ public class PlayerStatus : MonoBehaviour
     private void Start()
     {
         currentHealth = MaxHealth;
-        healthBar.SetMaxHealth(MaxHealth); 
+        healthBar.SetMaxHealth(MaxHealth);
+        UpdateHealthText();
     }
 
     private void Update()
@@ -49,5 +52,14 @@ public class PlayerStatus : MonoBehaviour
         slider.value = health;
 
         fill.color = gradient.Evaluate(slider.normalizedValue); 
+    }
+
+    private void UpdateHealthText()
+    {
+        if (healthText != null)
+        {
+            healthText.text = $"Health: {currentHealth} / {MaxHealth}";
+        }
+        
     }
 }
