@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    private bool isPaused = false;
+
     private void Awake()
     {
         if (Instance != null)
@@ -14,7 +16,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);  
         }
     }
 
@@ -26,4 +28,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PauseGame()
+    {
+        if (!isPaused)
+        {
+            Time.timeScale = 0f;
+            isPaused = true;
+        }
+    }
+
+    public void ResumeGame()
+    {
+        if (isPaused)
+        {
+            Time.timeScale = 1f;
+            isPaused = false;
+        }
+    }
+
+    public bool IsGamePaused()
+    {
+        return isPaused;
+    }
 }

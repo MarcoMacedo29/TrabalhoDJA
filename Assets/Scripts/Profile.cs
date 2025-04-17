@@ -43,6 +43,9 @@ public class Profile : MonoBehaviour
         {
             PlayerStatusCanvas.SetActive(false);
         }
+
+
+        HandlePauseState();
     }
 
     public void TogglePlayerStatus()
@@ -53,6 +56,21 @@ public class Profile : MonoBehaviour
         if (!isPlayerStatusOpen && inventoryCanvas.activeSelf)
         {
             inventoryCanvas.SetActive(false);
+        }
+
+
+        HandlePauseState();
+    }
+
+    private void HandlePauseState()
+    {
+        if (inventoryCanvas.activeSelf || PlayerStatusCanvas.activeSelf)
+        {
+            GameManager.Instance.PauseGame();
+        }
+        else
+        {
+            GameManager.Instance.ResumeGame();
         }
     }
 
@@ -65,6 +83,7 @@ public class Profile : MonoBehaviour
     {
         inventoryCanvas.SetActive(false);
         PlayerStatusCanvas.SetActive(false);
+        HandlePauseState();
     }
 
     public void OnMouseEnterBottomBar()

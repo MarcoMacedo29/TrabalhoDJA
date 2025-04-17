@@ -1,11 +1,9 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerStatus : MonoBehaviour
 {
     public Slider slider;
-    public TMP_Text healthText;
 
     public int MaxHealth = 100;
     public int currentHealth;
@@ -13,12 +11,11 @@ public class PlayerStatus : MonoBehaviour
 
     public Gradient gradient;
     public Image fill;
-    
+
     private void Start()
     {
         currentHealth = MaxHealth;
         healthBar.SetMaxHealth(MaxHealth);
-        UpdateHealthText();
     }
 
     private void Update()
@@ -26,12 +23,13 @@ public class PlayerStatus : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(20);
+           
         }
     }
 
-   private void TakeDamage(int damage)
+    private void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        currentHealth = Mathf.Max(currentHealth - damage, 0);
 
         healthBar.SetHealth(currentHealth);
     }
@@ -51,15 +49,6 @@ public class PlayerStatus : MonoBehaviour
     {
         slider.value = health;
 
-        fill.color = gradient.Evaluate(slider.normalizedValue); 
-    }
-
-    private void UpdateHealthText()
-    {
-        if (healthText != null)
-        {
-            healthText.text = $"Health: {currentHealth} / {MaxHealth}";
-        }
-        
+        fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 }
