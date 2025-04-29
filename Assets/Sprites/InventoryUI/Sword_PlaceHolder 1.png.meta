@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 27ee20ce229121448974f99fd2859edc
+guid: b69762ca246bdd74f891d0f9c27488cb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -537774595068612121
-    second: Sword_PlaceHolder_0
+      213: 851842022397422385
+    second: Sword_PlaceHolder 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sword_PlaceHolder_0
+      name: Sword_PlaceHolder 1_0
       rect:
         serializedVersion: 2
-        x: 71
-        y: 63
-        width: 114
-        height: 114
+        x: 63
+        y: 55
+        width: 122
+        height: 122
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7e1b4b3ead07988f0800000000000000
-      internalID: -537774595068612121
+      spriteID: 13bafbd5ec952db00800000000000000
+      internalID: 851842022397422385
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Sword_PlaceHolder_0: -537774595068612121
+      Sword_PlaceHolder 1_0: 851842022397422385
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

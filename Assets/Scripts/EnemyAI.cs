@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public float speed = 4f;
+    public float speed = 2f;
     private Transform target;
 
     private void Start()

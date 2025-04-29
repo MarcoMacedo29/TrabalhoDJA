@@ -10,7 +10,7 @@ public class StatusUI : MonoBehaviour
     {
         if (playerStatus != null && healthText != null)
         {
-            healthText.text = $"Health: {playerStatus.currentHealth} / {playerStatus.MaxHealth}";
+            healthText.text = $"Health:{playerStatus.currentHealth} / {playerStatus.MaxHealth}";
         }
     }
 }
