@@ -9,4 +9,13 @@ public class SwordPart : ScriptableObject
     public SwordPartType partType;
     public int damage;
     public Sprite sprite;
+
+    [Header("Hilt Only")]
+    public float attackSpeed;
+
+    [Header("Guard Only")]
+    public float blockStrength;
+
+    [Header("Blade Only")]
+    public float critChance;
 }

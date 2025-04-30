@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a03b2cab1b3254db53750c1dcf5f2b, type: 3}
+  m_Name: Hilt_1
+  m_EditorClassIdentifier: 
+  partName: Hilt_1
+  partType: 0
+  damage: 4
+  sprite: {fileID: -4353832196421927550, guid: 5abf2059796c8dc45b86dfb3e6c7be8a, type: 3}

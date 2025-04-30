@@ -26,4 +26,17 @@ public class SwordAssembler : MonoBehaviour
         int baseDamage = hilt.damage * guard.damage * blade.damage;
         return baseDamage;
     }
+
+    public void Recalculate()
+    {
+        totalDamage = CalculateBaseDamage();
+
+
+        if (gem != null && gem.elementType != ElementType.NoGem)
+
+        {
+            totalDamage += gem.bonusDamage;
+        }
+
+    }
 }
