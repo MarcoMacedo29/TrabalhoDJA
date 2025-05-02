@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 90daad9a79650e645a6f1ab677956df6
+guid: a12b99545102f994ebaa377aa2017736
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5719091904083455758
-    second: Blade_1_0
+      213: 7955240566140662492
+    second: MaxedSword_Guard_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blade_1_0
+      name: MaxedSword_Guard_0
       rect:
         serializedVersion: 2
-        x: 119
-        y: 111
-        width: 66
-        height: 66
+        x: 75
+        y: 75
+        width: 90
+        height: 90
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e0fe4b429cb4e5f40800000000000000
-      internalID: 5719091904083455758
+      spriteID: cd2779f6521b66e60800000000000000
+      internalID: 7955240566140662492
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Blade_1_0: 5719091904083455758
+      MaxedSword_Guard_0: 7955240566140662492
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

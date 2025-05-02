@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: 90daad9a79650e645a6f1ab677956df6
+guid: d752889e7f3513e4e8edc937b1539086
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5719091904083455758
-    second: Blade_1_0
+      213: -5399522029325404883
+    second: SwordSwing_0
+  - first:
+      213: 8512336164851315008
+    second: SwordSwing_1
+  - first:
+      213: 185560479842760255
+    second: SwordSwing_2
+  - first:
+      213: -7072709416772678392
+    second: SwordSwing_3
+  - first:
+      213: 4704307188114289745
+    second: SwordSwing_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +112,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blade_1_0
+      name: SwordSwing_0
       rect:
         serializedVersion: 2
-        x: 119
-        y: 111
-        width: 66
-        height: 66
+        x: 52
+        y: 614
+        width: 122
+        height: 130
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e0fe4b429cb4e5f40800000000000000
-      internalID: 5719091904083455758
+      spriteID: d25b92d725b0115b0800000000000000
+      internalID: -5399522029325404883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordSwing_1
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 612
+        width: 166
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0417ca244a4e12670800000000000000
+      internalID: 8512336164851315008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordSwing_2
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 332
+        width: 174
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f36f065f54e339200800000000000000
+      internalID: 185560479842760255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordSwing_3
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 306
+        width: 166
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80d44bd1240b8dd90800000000000000
+      internalID: -7072709416772678392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordSwing_4
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 10
+        width: 160
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1547edd867e094140800000000000000
+      internalID: 4704307188114289745
       vertices: []
       indices: 
       edges: []
@@ -125,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 54f8848888e133d40a9ff18caadf6a48
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Blade_1_0: 5719091904083455758
+      SwordSwing_0: -5399522029325404883
+      SwordSwing_1: 8512336164851315008
+      SwordSwing_2: 185560479842760255
+      SwordSwing_3: -7072709416772678392
+      SwordSwing_4: 4704307188114289745
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5abf2059796c8dc45b86dfb3e6c7be8a
+guid: 3c528a6e73d4a44409c15ebc25ae2b88
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4353832196421927550
-    second: Hilt_3_0
+      213: 6723531301468659350
+    second: Hilt_1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hilt_3_0
+      name: Hilt_1_0
       rect:
         serializedVersion: 2
         x: 63
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 28dbc985fa41493c0800000000000000
-      internalID: -4353832196421927550
+      spriteID: 69e524c8818ce4d50800000000000000
+      internalID: 6723531301468659350
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hilt_3_0: -4353832196421927550
+      Hilt_1_0: 6723531301468659350
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
