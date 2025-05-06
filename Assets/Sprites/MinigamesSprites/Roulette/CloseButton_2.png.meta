@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 73d08ef507cae8d4c846ef42395f97b3
+guid: 298443324af1ba34ab234b142fc9a665
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4157937411186551904
-    second: CraftIcon_0
+      213: -1143992248250817099
+    second: CloseButton_2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,11 +100,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CraftIcon_0
+      name: CloseButton_2_0
       rect:
         serializedVersion: 2
-        x: 73
-        y: 65
+        x: 71
+        y: 71
         width: 114
         height: 114
       alignment: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 06ce418bb06f3b930800000000000000
-      internalID: 4157937411186551904
+      spriteID: 5b5a5318c19bf10f0800000000000000
+      internalID: -1143992248250817099
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CraftIcon_0: 4157937411186551904
+      CloseButton_2_0: -1143992248250817099
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
