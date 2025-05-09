@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -6,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     private bool isPaused = false;
+    public float delayBeforeStart = 2f;
 
     private void Awake()
     {
@@ -49,5 +51,15 @@ public class GameManager : MonoBehaviour
     public bool IsGamePaused()
     {
         return isPaused;
+    }
+
+    public void SlotScene()
+    {
+        StartCoroutine(StartSlotWithDelay());
+    }
+    private IEnumerator StartSlotWithDelay()
+    {
+        yield return new WaitForSeconds(delayBeforeStart);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

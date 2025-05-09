@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 033165728a248c0448ca49d261095a38
+guid: 2addb0c40aa3d754c84d652e1e8ed5a9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5858188884177675971
-    second: RewardItem_0
+      213: 9208715080272408583
+    second: NextButton_0
+  - first:
+      213: -7045320980046531939
+    second: NextButton_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,23 +103,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RewardItem_0
+      name: NextButton_0
       rect:
         serializedVersion: 2
-        x: 85
-        y: 87
-        width: 85
+        x: 39
+        y: 343
+        width: 178
         height: 82
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 13, y: 21, z: 12, w: 17}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3c66d8c80c77c4150800000000000000
-      internalID: 5858188884177675971
+      spriteID: 7007b6d539debcf70800000000000000
+      internalID: 9208715080272408583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NextButton_1
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 91
+        width: 178
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9238b775edf93e90800000000000000
+      internalID: -7045320980046531939
       vertices: []
       indices: 
       edges: []
@@ -125,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e33e21875831b004fa79ae1bd8fa1585
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RewardItem_0: 5858188884177675971
+      NextButton_0: 9208715080272408583
+      NextButton_1: -7045320980046531939
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

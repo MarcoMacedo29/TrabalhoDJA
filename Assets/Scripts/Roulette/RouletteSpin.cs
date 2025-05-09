@@ -5,6 +5,9 @@ using UnityEngine.UI;
 public class RouletteSpin : MonoBehaviour
 {
     private bool isSpinning = false;
+    private bool waitingForDecision = false;
+
+    private SoundEffects soundEffects;
 
     [Header("Spin Settings")]
     public float spinDuration = 4f;
@@ -15,6 +18,8 @@ public class RouletteSpin : MonoBehaviour
 
     [Header("Reward Slot")]
     public Image rewardedItemSlot;
+
+    public Button spinButton;
 
     [Header("References")]
     public Transform itemPicker;  // This rotates around the wheel
@@ -31,8 +36,11 @@ public class RouletteSpin : MonoBehaviour
     }
     public void StartSpin()
     {
-        if (!isSpinning)
+        if (!isSpinning || waitingForDecision)
         {
+            soundEffects?.Button1();
+            soundEffects?.PlaySpinSound();
+
             float fullSpins = Random.Range(5f, 7f);
             float extraAngle = Random.Range(0f, 360f);
             float targetAngle = (fullSpins * 360f) + extraAngle;
@@ -71,6 +79,8 @@ public class RouletteSpin : MonoBehaviour
 
         isSpinning = false;
 
+        soundEffects?.StopSpinSound();
+
         selectedItem = slots[selectedIndex].swordPart;
         RewardData selectedNoReward = slots[selectedIndex].noReward; // Check for no-reward slot
 
@@ -79,9 +89,12 @@ public class RouletteSpin : MonoBehaviour
         if (rewardedItemSlot != null)
         {
             if (selectedNoReward != null)
-            {
-                // Handle no reward scenario
-                rewardedItemSlot.enabled = false; // Hide the slot image
+            {                        
+                ClearRewardSlot();
+
+                waitingForDecision = false;
+                if (spinButton != null)
+                    spinButton.interactable = true;
             }
             else if (selectedItem != null && selectedItem.sprite != null)
             {
@@ -90,10 +103,40 @@ public class RouletteSpin : MonoBehaviour
                 Color c = rewardedItemSlot.color;
                 c.a = 1f; // fully visible
                 rewardedItemSlot.color = c;
+
+                waitingForDecision = true;
+                if (spinButton != null)
+                    spinButton.interactable = false;
             }
         }
+        
+    }
+    public void OnPlayerDecided()
+    {
+        waitingForDecision = false;
+        if (spinButton != null )
+            spinButton.interactable = true;
+    }
+    public void OnAccept()
+    {
+        OnPlayerDecided();
     }
 
+    public void OnReject()
+    {
+        ClearRewardSlot();
+        OnPlayerDecided();
+
+    }
+
+    public void ClearRewardSlot()
+    {
+        if (rewardedItemSlot != null)
+        {
+            rewardedItemSlot.sprite = null;
+            rewardedItemSlot.enabled = false;
+        }
+    }
 
     private float GetPickerAngle()
     {

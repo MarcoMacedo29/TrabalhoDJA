@@ -4,8 +4,9 @@ using UnityEngine.UI;
 
 public class HoverFadeMessage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public GameObject messageObject; 
-    public float fadeDuration = 0.3f;
+    public GameObject messageObject;
+    public GameObject textObject;
+    public float fadeDuration = 0.5f;
 
     private Graphic[] graphics;
     private Coroutine fadeCoroutine;
@@ -14,7 +15,7 @@ public class HoverFadeMessage : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         if (messageObject != null)
         {
-            graphics = messageObject.GetComponentsInChildren<Graphic>(true); 
+            graphics = messageObject.GetComponentsInChildren<Graphic>(true);
             foreach (var g in graphics)
                 SetAlpha(g, 0f);
         }
