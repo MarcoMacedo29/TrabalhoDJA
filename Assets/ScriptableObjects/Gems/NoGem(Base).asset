@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gemName: 
   elementType: 0
-  gemColor: {r: 1, g: 1, b: 1, a: 1}
+  sprite: {fileID: 0}
+  componentGems: []
   bonusDamage: 0
-  procChance: 0
   effectDuration: 0
   damageOverTime: 0
   slowAmount: 0
+  critChance: 0
   lifestealPercent: 0
   pullRadius: 0
   cooldown: 0

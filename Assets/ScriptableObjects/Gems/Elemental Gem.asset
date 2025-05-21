@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 677892c41458ba3429cfeb8b8899f862, type: 3}
+  m_Name: Elemental Gem
+  m_EditorClassIdentifier: 
+  gemName: Elemental Gem (Prism)
+  elementType: 6
+  sprite: {fileID: 8279229239293882077, guid: 5b4b37ccf402ce94a892c65944e047e7, type: 3}
+  componentGems:
+  - {fileID: 11400000, guid: c7fa662310ed2b04a80f11b026ab83c5, type: 2}
+  - {fileID: 11400000, guid: 4ef5808893dce3c4ca3a1d56de3c15ea, type: 2}
+  - {fileID: 11400000, guid: 600456509dd924843a755cec960ef877, type: 2}
+  - {fileID: 11400000, guid: c12d2e4c1a657f045a2f72fc6e20025f, type: 2}
+  - {fileID: 11400000, guid: 218dc3e420e299a49976c6e634553239, type: 2}
+  bonusDamage: 10
+  effectDuration: 0
+  damageOverTime: 0
+  slowAmount: 0
+  critChance: 0
+  lifestealPercent: 0
+  pullRadius: 0
+  cooldown: 0
