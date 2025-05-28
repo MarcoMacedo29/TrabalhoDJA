@@ -15,20 +15,22 @@ public class DiceRollVisual : MonoBehaviour
     public List<DiceVisual> resultSprites; // values 2–12
 
     [Header("Jingle Settings")]
-    [Tooltip("Duration of the jingle before rolling (seconds)")] public float jingleDuration = 0.5f;
-    [Tooltip("Vertical amplitude of jingle in pixels")] public float jingleAmplitude = 10f;
-    [Tooltip("Jingles per second")] public float jingleFrequency = 4f;
+    public float jingleDuration = 0.5f;
+    public float jingleAmplitude = 10f;
+    public float jingleFrequency = 4f;
 
     [Header("Spin Settings")]
-    [Tooltip("Minimum number of face changes before final result")] public int minSpinIterations = 10;
-    [Tooltip("Maximum number of face changes before final result")] public int maxSpinIterations = 15;
-    [Tooltip("Base interval between face changes (seconds)")] public float baseInterval = 0.05f;
-    [Tooltip("Max random jitter added/subtracted from base interval")] public float intervalJitter = 0.02f;
+    public int minSpinIterations = 10;
+    public int maxSpinIterations = 15;
+    public float baseInterval = 0.05f;
+    public float intervalJitter = 0.02f;
 
     private bool isSpinning = false;
     private Vector2 dice1OrigPos;
     private Vector2 dice2OrigPos;
     private Vector2 resultOrigPos;
+
+    private float lastBetAmount;
 
     private void Awake()
     {
@@ -38,9 +40,10 @@ public class DiceRollVisual : MonoBehaviour
         resultOrigPos = resultImage.rectTransform.anchoredPosition;
     }
 
-    public void RollDice()
+    public void RollDice(float betAmount)
     {
         if (isSpinning) return;
+        lastBetAmount = betAmount;
         isSpinning = true;
         StartCoroutine(JingleAndRoll());
     }
@@ -106,6 +109,9 @@ public class DiceRollVisual : MonoBehaviour
         resultImage.sprite = resultSprites.Find(r => r.value == finalTotal)?.sprite;
 
         Debug.Log($"Dice Roll: {finalD1} + {finalD2} = {finalTotal}");
+
+
+        ApplyPayout(finalTotal);
         isSpinning = false;
     }
 
@@ -113,4 +119,25 @@ public class DiceRollVisual : MonoBehaviour
     {
         return baseInterval + Random.Range(-intervalJitter, intervalJitter);
     }
+    private void ApplyPayout(int total)
+    {
+        float multiplier;
+
+        if (total <= 3)        // 2–3
+            multiplier = 0f;
+        else if (total <= 5)   // 4–5
+            multiplier = 0.5f;
+        else if (total <= 8)   // 6–8
+            multiplier = 1f;
+        else if (total <= 10)  // 9–10
+            multiplier = 1.5f;
+        else                    // 11–12
+            multiplier = 2f;
+
+        float payout = lastBetAmount * multiplier;
+        float profit = payout - lastBetAmount;
+
+        Debug.Log($"Dice Bet Result ? Bet: {lastBetAmount}, Total: {total}, Profit: {profit}");
+    }
+
 }
