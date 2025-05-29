@@ -2886,7 +2886,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 645bb08d8c5116143be0966a9cb2202c, type: 2}
   - {fileID: 11400000, guid: ef89a22c0e2cb98428729c4e6ea086da, type: 2}
   - {fileID: 11400000, guid: c49c8b57aa0e3d04a9851436f8a8ab42, type: 2}
-  - {fileID: 11400000, guid: eb01acdfa8d9b7d4683f160fa736f9cc, type: 2}
   - {fileID: 11400000, guid: ae358c953d5031049b8784937b4fd6a0, type: 2}
   - {fileID: 11400000, guid: 1abe24bd650515d40bd57d933789c123, type: 2}
   jackpotSymbol: {fileID: 11400000, guid: 1abe24bd650515d40bd57d933789c123, type: 2}

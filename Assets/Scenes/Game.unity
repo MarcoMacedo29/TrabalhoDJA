@@ -938,6 +938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base_Sword
       objectReference: {fileID: 0}
+    - target: {fileID: 6301381376527450308, guid: ba2debf4e0468e04687402d690bedbd2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6307810370718627204, guid: ba2debf4e0468e04687402d690bedbd2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 457.9

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum SlotRewardType {None,Gem,Heal,Health,Coin,Damage }
+public enum SlotRewardType {None,Gem,Heal,Health,Coin }
 
 [CreateAssetMenu(fileName = "New Slot Symbol", menuName = "SlotMachine/Symbol")]
 public class SlotSymbol : ScriptableObject

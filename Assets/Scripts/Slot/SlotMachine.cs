@@ -133,10 +133,6 @@ public class SlotMachine : MonoBehaviour
                     Debug.Log($"Max HP increased by {payout}!");
                     // Player.Instance.AddMaxHealth(payout);
                     break;
-                case SlotRewardType.Damage:
-                    Debug.Log($"Damage boosted by {payout}!");
-                    // Player.Instance.AddDamage(payout);
-                    break;
                 case SlotRewardType.Gem:
                     Debug.Log($"You won {payout} gems!");
                     // GameManager.Instance.AddGems(payout);
