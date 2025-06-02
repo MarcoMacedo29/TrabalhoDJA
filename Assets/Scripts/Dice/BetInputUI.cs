@@ -14,6 +14,9 @@ public class BetInputUI : MonoBehaviour
 
     private int currentBet = 0;
 
+    [Header("References")]
+    public DiceRollVisual diceRoller;
+
     private void Start()
     {
         confirmButton.onClick.AddListener(OnConfirm);
@@ -65,8 +68,21 @@ public class BetInputUI : MonoBehaviour
         if (currentBet <= 0 || currentBet > CoinManager.Instance.Coins)
             return;
 
+        // 1) Permanently remove the bet from the player’s coins
         CoinManager.Instance.SpendCoins(currentBet);
         Debug.Log($"Bet confirmed: {currentBet} coins");
+
+        // 2) Immediately start the dice?spin with that bet amount
+        if (diceRoller != null)
+        {
+            diceRoller.RollDice(currentBet);
+        }
+        else
+        {
+            Debug.LogError("DiceRollVisual reference is missing on BetInputUI!");
+        }
+
+        // 3) Clear the local bet
         currentBet = 0;
         RefreshDisplay();
     }

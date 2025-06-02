@@ -20,7 +20,7 @@ public class AutoRewardAnim : MonoBehaviour
     public float itemShrinkDuration = 0.5f;
 
     [Header("Trigger Settings")]
-    public float startDelay = 0.2f;
+    public float startDelay = 0.2f;  // small delay before the animation actually begins
 
     private Vector2 bagTargetPos;
     private Transform originalParent;
@@ -36,18 +36,6 @@ public class AutoRewardAnim : MonoBehaviour
         bag.gameObject.SetActive(false);
         starObject.SetActive(false);
     }
-
-    /*
-    private void OnEnable()
-    {
-        JackpotManager.OnGemCollected += HandleGemCollected;
-    }
-
-    private void OnDisable()
-    {
-        JackpotManager.OnGemCollected -= HandleGemCollected;
-    }
-    */
 
     public void TriggerAnim()
     {

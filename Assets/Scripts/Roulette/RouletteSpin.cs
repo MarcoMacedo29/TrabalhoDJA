@@ -38,6 +38,11 @@ public class RouletteSpin : MonoBehaviour
     {
         if (!isSpinning || waitingForDecision)
         {
+            if (CoinManager.Instance.Coins < 20)
+                return;
+
+            CoinManager.Instance.SpendCoins(20);
+
             soundEffects?.Button1();
             soundEffects?.PlaySpinSound();
 
@@ -48,6 +53,18 @@ public class RouletteSpin : MonoBehaviour
             StartCoroutine(RotateItemPicker(targetAngle));
         }
     }
+
+    private void Update()
+    {
+        if (spinButton != null)
+        {
+            spinButton.interactable =
+                (CoinManager.Instance.Coins >= 20) &&
+                !isSpinning &&
+                !waitingForDecision;
+        }
+    }
+
 
     private IEnumerator RotateItemPicker(float totalAngle)
     {

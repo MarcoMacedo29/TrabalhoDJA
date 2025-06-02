@@ -7,20 +7,21 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     private bool isPaused = false;
-    public float delayBeforeStart = 2f;
+    public float delayBeforeStart = 1f;
 
     private void Awake()
     {
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
         }
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);  
+            DontDestroyOnLoad(gameObject);
         }
     }
+
 
     private void OnDestroy()
     {
@@ -53,13 +54,24 @@ public class GameManager : MonoBehaviour
         return isPaused;
     }
 
-    public void SlotScene()
+    public void Scenes()
     {
-        StartCoroutine(StartSlotWithDelay());
+        StartCoroutine(StartScenesWithDelay());
     }
-    private IEnumerator StartSlotWithDelay()
+    private IEnumerator StartScenesWithDelay()
     {
         yield return new WaitForSeconds(delayBeforeStart);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Debug.LogWarning("No more scenes to load. Last scene reached.");
+        }
     }
+
 }

@@ -19,18 +19,26 @@ public class SlotMachine : MonoBehaviour
     public Image gemSlotImage;
     public List<GemEffect> possibleGems;
 
+    [Header("Auto Reward Animation (bag + gem)")]
+    public AutoRewardAnim autoRewardAnim;
+
     private bool isSpinning = false;
 
     private void Start()
     {
         spinButton.onClick.AddListener(SpinReels);
+
     }
 
     void SpinReels()
     {
         if (isSpinning) return;
-        isSpinning = true;
 
+        if (CoinManager.Instance.Coins < 50) return;
+
+        CoinManager.Instance.SpendCoins(50);
+
+        isSpinning = true;
         lightsAnim.ShowIdle();
 
         finalSymbols = new List<SlotSymbol>(new SlotSymbol[reels.Length]);
@@ -82,34 +90,48 @@ public class SlotMachine : MonoBehaviour
 
     private void EvaluateRewards(List<SlotSymbol> results)
     {
-        // Group symbols into matches of 2 or more, but EXCLUDE any with rewardType None (e.g. cherries)
+        // Group symbols into matches of 2+ (excluding rewardType None)
         var groups = results
             .GroupBy(s => s)
             .Where(g => g.Count() >= 2 && g.Key.rewardType != SlotRewardType.None)
             .ToList();
 
-        // If no valid matches remain (including only cherry?matches), stay idle
+        // If no winning matches, do nothing
         if (groups.Count == 0)
         {
             Debug.Log("No winning matches this spin (cherries don't pay). Lights stay idle.");
             return;
         }
 
-        // Jackpot check: 3× of the special jackpot symbol
+        // Jackpot check: exactly 3× of the special jackpot symbol
         if (groups.Any(g => g.Key == jackpotSymbol && g.Count() == 3))
         {
             Debug.Log("?? JACKPOT! You got 3× Jackpot symbols! You earn 1 GEM!");
             lightsAnim.ShowJackpot();
 
-            // Add this line below to show a random gem
+            // 1) Show a random gem fading in
             ShowRandomGem();
 
-            // GameManager.Instance.AddGems(1);
+            // 2) AFTER 2 seconds, trigger the bag+gem animation
+            if (autoRewardAnim != null)
+            {
+                // Option A: Use Invoke (simplest)
+                Invoke(nameof(InvokeBagAnim), 2f);
+
+                // Option B: Or you can launch a coroutine:
+                // StartCoroutine(DelayedBagAnim(2f));
+            }
+            else
+            {
+                Debug.LogWarning("AutoRewardAnim reference is missing in Inspector!");
+            }
+
             return;
         }
 
-            // Otherwise it's at least one 2×/3× non?jackpot, non?cherry match
-            Debug.Log("Nice match! Playing match lights.");
+
+        // Otherwise it's at least one 2×/3× non?jackpot, non?cherry match
+        Debug.Log("Nice match! Playing match lights.");
         lightsAnim.ShowMatch();
 
         // Payout for each winning group
@@ -142,6 +164,11 @@ public class SlotMachine : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void InvokeBagAnim()
+    {
+        autoRewardAnim.TriggerAnim();
     }
     public void TestJackpotSpin()
     {

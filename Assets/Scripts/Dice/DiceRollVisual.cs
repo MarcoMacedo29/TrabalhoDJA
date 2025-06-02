@@ -138,6 +138,14 @@ public class DiceRollVisual : MonoBehaviour
         float profit = payout - lastBetAmount;
 
         Debug.Log($"Dice Bet Result ? Bet: {lastBetAmount}, Total: {total}, Profit: {profit}");
-    }
 
+        // Since we already deducted lastBetAmount in BetInputUI,
+        // we now add back the 'payout' amount (which is 0 if the player loses).
+        int payoutInt = Mathf.FloorToInt(payout);
+        if (payoutInt > 0)
+        {
+            CoinManager.Instance.AddCoins(payoutInt);
+        }
+
+    }
 }
