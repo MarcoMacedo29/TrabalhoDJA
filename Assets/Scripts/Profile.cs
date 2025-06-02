@@ -11,6 +11,10 @@ public class Profile : MonoBehaviour
     public float fadeDelay = 1f;
     private Coroutine fadeCoroutine;
 
+    public GameObject inventoryPanel; 
+    public GameObject craftingPanel; 
+
+
     private void Start()
     {
         if (PlayerStatusCanvas != null)
@@ -39,9 +43,14 @@ public class Profile : MonoBehaviour
         bool isInventoryOpen = inventoryCanvas.activeSelf;
         inventoryCanvas.SetActive(!isInventoryOpen);
 
-        if (!isInventoryOpen && PlayerStatusCanvas.activeSelf)
+        if (!isInventoryOpen)
         {
-            PlayerStatusCanvas.SetActive(false);
+            ShowInventoryPanelA();
+
+            if (PlayerStatusCanvas.activeSelf)
+            {
+                PlayerStatusCanvas.SetActive(false);
+            }
         }
 
 
@@ -62,6 +71,18 @@ public class Profile : MonoBehaviour
         HandlePauseState();
     }
 
+    public void ShowInventoryPanelA()
+    {
+        inventoryPanel.SetActive(true);
+        craftingPanel.SetActive(false);
+    }
+
+    public void ShowInventoryPanelB()
+    {
+        inventoryPanel.SetActive(false);
+        craftingPanel.SetActive(true);
+    }
+        
     private void HandlePauseState()
     {
         if (inventoryCanvas.activeSelf || PlayerStatusCanvas.activeSelf)

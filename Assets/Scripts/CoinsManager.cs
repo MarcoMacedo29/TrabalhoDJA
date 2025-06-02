@@ -9,128 +9,145 @@ public class CoinManager : MonoBehaviour
     [Header("UI Reference")]
     public TextMeshProUGUI coinText;
 
+    public GameObject floatingTextPrefab;
+    public float floatDistance = 50f;
+    public float floatDuration = 1f;
+
     [Header("Settings")]
-    [Tooltip("How many coins the player always starts (and resets) with")]
-    public int defaultCoins = 100;
+    [Tooltip("How many coins the player starts with when clicking 'Play'")]
+    public int defaultCoins = 0;
 
     private int coins;
     public int Coins => coins;
 
-    [Header("Floating Text Prefab")]
-    [Tooltip("Prefab: a simple TextMeshProUGUI that will float up when coins change")]
-    public GameObject floatingTextPrefab;
-
-    [Header("Animation Settings")]
-    [Tooltip("How far (in pixels) the floating text moves upward")]
-    public float floatDistance = 50f;
-    [Tooltip("How long (in seconds) the floating text animation lasts")]
-    public float floatDuration = 1f;
-
-    private void Awake()
+    void Awake()
     {
-        // Singleton setup
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            coins = defaultCoins;
         }
         else
         {
             Destroy(gameObject);
-            return;
         }
     }
 
-    private void Start()
+    void Start()
     {
+        if (coinText == null)
+        {
+            TryReconnectUI();
+        }
+
+        if (PlayerPrefs.HasKey("Coins"))
+        {
+            coins = PlayerPrefs.GetInt("Coins");
+        }
+        else
+        {
+            coins = defaultCoins;
+        }
+
         UpdateUI();
     }
 
-    /// <summary>
-    /// Starts a “–amount” float animation, then deducts coins after it finishes.
-    /// </summary>
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("Coins", coins);
+    }
+
+    public void TryReconnectUI()
+    {
+        GameObject obj = GameObject.FindWithTag("CoinText");
+        if (obj != null)
+        {
+            coinText = obj.GetComponent<TextMeshProUGUI>();
+            UpdateUI();
+        }
+    }
+
+    public void ResetCoins()
+    {
+        coins = defaultCoins;
+        PlayerPrefs.SetInt("Coins", coins);
+        UpdateUI();
+    }
+
     public void SpendCoins(int amount)
     {
-        if (amount <= 0) return;
-        StartCoroutine(ShowThenApplyDelta(-amount));
+        StartCoroutine(CoinManager.Instance.ShowThenApplyDelta(amount));
+        coins = Mathf.Max(0, coins - amount);
+        PlayerPrefs.SetInt("Coins", coins);
+        UpdateUI();
     }
 
-    /// <summary>
-    /// Starts a “+amount” float animation, then adds coins after it finishes.
-    /// </summary>
     public void AddCoins(int amount)
     {
-        if (amount <= 0) return;
-        StartCoroutine(ShowThenApplyDelta(+amount));
+        StartCoroutine(CoinManager.Instance.ShowThenApplyDelta(amount));
+        coins += amount;
+        PlayerPrefs.SetInt("Coins", coins);
+        UpdateUI();
     }
 
-    /// <summary>
-    /// Immediately sets the coin total (no animation). 
-    /// </summary>
     public void SetCoins(int amount)
     {
         coins = Mathf.Max(0, amount);
+        PlayerPrefs.SetInt("Coins", coins);
         UpdateUI();
     }
 
     private void UpdateUI()
     {
         if (coinText != null)
-            coinText.text = coins.ToString();
+            coinText.text = "" + coins;
+    }
+    void OnEnable()
+    {
+        TryReconnectUI();
+    }
+    void Update()
+    {
+        if (coinText == null)
+        {
+            TryReconnectUI();
+        }
     }
 
-    /// <summary>
-    /// Instantiates a floating-text above the coinText,
-    /// animates it upward over floatDuration, then updates the coin total.
-    /// </summary>
-    private IEnumerator ShowThenApplyDelta(int delta)
+    public IEnumerator ShowThenApplyDelta(int delta)
     {
         if (floatingTextPrefab == null || coinText == null)
-        {
-            Debug.LogWarning("FloatingTextPrefab or coinText is not assigned!");
             yield break;
-        }
 
-        // 1) Instantiate the floating text as a child of the same Canvas
         Canvas parentCanvas = coinText.GetComponentInParent<Canvas>();
         if (parentCanvas == null)
-        {
-            Debug.LogWarning("coinText has no Canvas parent! Cannot show floating text.");
             yield break;
-        }
 
-        GameObject floatGO = Instantiate(
-            floatingTextPrefab,
-            parentCanvas.transform);
-
-        // 2) Position it so it sits directly above coinText
+        // Instantiate floating text under the same Canvas
+        GameObject floatGO = Instantiate(floatingTextPrefab, parentCanvas.transform);
         RectTransform floatRect = floatGO.GetComponent<RectTransform>();
         RectTransform coinRect = coinText.GetComponent<RectTransform>();
 
-        // Convert coinText’s world position into the Canvas’s local coordinates
-        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(
-            parentCanvas.worldCamera, coinText.transform.position);
-
+        // Compute screen position of the coinText, then convert to local Canvas space
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(parentCanvas.worldCamera, coinText.transform.position);
         Vector2 localPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             parentCanvas.transform as RectTransform,
             screenPoint,
             parentCanvas.worldCamera,
-            out localPos);
+            out localPos
+        );
 
-        // Optionally offset upward by a few pixels so it doesn’t overlap
-        float yOffset = 10f;
-        floatRect.anchoredPosition = new Vector2(localPos.x, localPos.y + yOffset);
+        // Offset slightly above the coinText
+        floatRect.anchoredPosition = new Vector2(localPos.x, localPos.y + 10f);
 
-        // 3) Set the text: “+N” or “?N”
+        // Set the text to show “+delta” or “-delta”
         TextMeshProUGUI tmp = floatGO.GetComponentInChildren<TextMeshProUGUI>();
         if (tmp != null)
-        {
-            tmp.text = (delta > 0 ? "+" : "") + delta.ToString();
-        }
+            tmp.text = (delta > 0 ? "" : "-") + delta.ToString();
 
-        // 4) Animate over time: move up by `floatDistance`, fade out (optional)
+        // Ensure there is a CanvasGroup to fade out
         CanvasGroup cg = floatGO.GetComponent<CanvasGroup>();
         if (cg == null) cg = floatGO.AddComponent<CanvasGroup>();
 
@@ -138,25 +155,22 @@ public class CoinManager : MonoBehaviour
         Vector2 endPos = startPos + Vector2.up * floatDistance;
         float elapsed = 0f;
 
+        // Animate upward + fade-out over floatDuration seconds
         while (elapsed < floatDuration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / floatDuration);
-
-            // Lerp position
             floatRect.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
-
-            // Fade alpha from 1 ? 0
             cg.alpha = Mathf.Lerp(1f, 0f, t);
-
             yield return null;
         }
 
-        // 5) Destroy the floating text object
         Destroy(floatGO);
 
-        // 6) Only now, modify `coins` and update the main UI
+        // Finally, apply the delta to coins and update UI
         coins = Mathf.Max(0, coins + delta);
+        PlayerPrefs.SetInt("Coins", coins);
         UpdateUI();
     }
+
 }

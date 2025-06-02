@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,7 +20,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
 
     private void OnDestroy()
     {
@@ -54,24 +52,11 @@ public class GameManager : MonoBehaviour
         return isPaused;
     }
 
-    public void Scenes()
+    /*
+    void Start()
+
     {
-        StartCoroutine(StartScenesWithDelay());
+        CoinManager.Instance?.TryReconnectUI();
     }
-    private IEnumerator StartScenesWithDelay()
-    {
-        yield return new WaitForSeconds(delayBeforeStart);
-
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
-        {
-            SceneManager.LoadScene(nextSceneIndex);
-        }
-        else
-        {
-            Debug.LogWarning("No more scenes to load. Last scene reached.");
-        }
-    }
-
+    */
 }

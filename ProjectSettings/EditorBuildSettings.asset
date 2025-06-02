@@ -15,14 +15,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Game.unity
     guid: f2a7e1e1761158c47b7ca17d4274f3d3
   - enabled: 1
-    path: Assets/Scenes/RouletteScene.unity
-    guid: 246fb3df5cbd56d49b892265a57d79f2
+    path: Assets/Scenes/SlotScene.unity
+    guid: 3b715f0152935074e97aab251046ecf5
   - enabled: 1
     path: Assets/Scenes/DiceScene.unity
     guid: 5a051ebbf75998b419b4d01ecdd7600d
   - enabled: 1
-    path: Assets/Scenes/SlotScene.unity
-    guid: 3b715f0152935074e97aab251046ecf5
+    path: Assets/Scenes/RouletteScene.unity
+    guid: 246fb3df5cbd56d49b892265a57d79f2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

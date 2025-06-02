@@ -14,6 +14,7 @@ public class MenuManager : MonoBehaviour
 
     private IEnumerator StartGameWithDelay()
     {
+        //CoinManager.Instance.ResetCoins();//
         yield return new WaitForSeconds(delayBeforeStart);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
