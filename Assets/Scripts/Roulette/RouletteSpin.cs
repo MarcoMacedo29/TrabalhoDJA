@@ -136,9 +136,13 @@ public class RouletteSpin : MonoBehaviour
     }
     public void OnAccept()
     {
+        if (selectedItem != null && InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.AddItem(selectedItem);
+        }
+
         OnPlayerDecided();
     }
-
     public void OnReject()
     {
         ClearRewardSlot();

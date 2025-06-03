@@ -29,13 +29,13 @@ public class EnemySpawner : MonoBehaviour
         {
             timeSinceLastRamp = 0f;
 
-            
+
             spawnRate = Mathf.Max(minSpawnRate, spawnRate - spawnRateDecrease);
 
-            
+
             maxEnemiesInArena = Mathf.Min(maxEnemiesInArena + maxEnemiesIncrease, maxEnemiesCap);
 
-            
+
             CancelInvoke(nameof(SpawnEnemy));
             InvokeRepeating(nameof(SpawnEnemy), 0f, spawnRate);
 
@@ -49,10 +49,19 @@ public class EnemySpawner : MonoBehaviour
         if (totalEnemiesSpawned >= maxEnemiesInArena)
             return;
 
+        if (enemyPrefab == null)
+        {
+            Debug.LogError("Enemy prefab is null or was destroyed!");
+            return;
+        }
+
         Vector3 spawnPosition = transform.position + (Random.onUnitSphere * spawnRadius);
         spawnPosition.y = 0;
 
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        // FIX: Use the prefab’s original rotation
+        Instantiate(enemyPrefab, spawnPosition, enemyPrefab.transform.rotation);
+
         totalEnemiesSpawned++;
     }
+
 }

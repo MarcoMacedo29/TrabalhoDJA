@@ -23,4 +23,6 @@ public class EnemyAI : MonoBehaviour
 
         transform.position += direction * speed * Time.deltaTime;
     }
+
+
 }
