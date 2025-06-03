@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cereja_0: 3233614769211704605
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

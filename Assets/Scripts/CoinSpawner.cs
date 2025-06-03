@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class CoinSpawner : MonoBehaviour
 {
+    [Header("Coin Settings")]
     public GameObject coinPrefab;
     public float spawnInterval = 2f;
     public int maxCoinsInScene = 10;
-    public float spawnRangeX = 5f;
-    public float spawnRangeZ = 5f;
-    public Transform playerTransform;
+
+    [Header("Spawn Area (baseado no centro da arena)")]
+    public Vector3 arenaCenter = new Vector3(0, 0, 0);
+    public float spawnRangeX = 10f;
+    public float spawnRangeZ = 10f;
 
     [HideInInspector]
     public int currentCoins = 0;
@@ -19,27 +22,22 @@ public class CoinSpawner : MonoBehaviour
 
     private void SpawnCoin()
     {
-        if (currentCoins >= maxCoinsInScene || coinPrefab == null || playerTransform == null)
+        if (currentCoins >= maxCoinsInScene || coinPrefab == null)
             return;
 
         Vector3 spawnPos = new Vector3(
-            Random.Range(playerTransform.position.x - spawnRangeX, playerTransform.position.x + spawnRangeX),
-            playerTransform.position.y,
-            Random.Range(playerTransform.position.z - spawnRangeZ, playerTransform.position.z + spawnRangeZ)
+            Random.Range(arenaCenter.x - spawnRangeX, arenaCenter.x + spawnRangeX),
+            arenaCenter.y + 0.5f, 
+            Random.Range(arenaCenter.z - spawnRangeZ, arenaCenter.z + spawnRangeZ)
         );
 
         GameObject coin = Instantiate(coinPrefab, spawnPos, Quaternion.identity);
         currentCoins++;
 
-        // Atribuir o spawner à moeda
         Coin coinScript = coin.GetComponent<Coin>();
         if (coinScript != null)
         {
             coinScript.spawner = this;
-        }
-        else
-        {
-            Debug.LogWarning("A moeda instanciada não tem o script Coin!");
         }
     }
 
