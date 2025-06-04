@@ -8,7 +8,7 @@ public class Coin : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            CoinManager.Instance.AddCoins(2);
+            CoinManager.Instance.AddCoins(200);
 
             if (spawner != null)
             {

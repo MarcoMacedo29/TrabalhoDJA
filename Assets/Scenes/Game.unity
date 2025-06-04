@@ -1199,7 +1199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8111593159487173597, guid: adf62212de0dc124c8665ac896ccde03, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8245535862346223582, guid: adf62212de0dc124c8665ac896ccde03, type: 3}
       propertyPath: m_Name
@@ -1321,6 +1321,22 @@ PrefabInstance:
       propertyPath: 'slotImages.Array.data[9]'
       value: 
       objectReference: {fileID: 313147574}
+    - target: {fileID: 8500119536370891149, guid: adf62212de0dc124c8665ac896ccde03, type: 3}
+      propertyPath: emptySlotSprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500119536370891149, guid: adf62212de0dc124c8665ac896ccde03, type: 3}
+      propertyPath: 'emptySlotSprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 7930265040436356065, guid: 6d71b9c4a57d9474fa3ce88be38c19da, type: 3}
+    - target: {fileID: 8500119536370891149, guid: adf62212de0dc124c8665ac896ccde03, type: 3}
+      propertyPath: 'emptySlotSprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: -2888910892671834253, guid: afb1f064eb1d0114585b7c90067238eb, type: 3}
+    - target: {fileID: 8500119536370891149, guid: adf62212de0dc124c8665ac896ccde03, type: 3}
+      propertyPath: 'emptySlotSprites.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8843455131728870980, guid: e24e3be2a198b634ea6146280e424645, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3307,7 +3323,7 @@ GameObject:
   - component: {fileID: 741068802}
   - component: {fileID: 741068801}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Hilt(Base)Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3330,7 +3346,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -2.1}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 44, y: 44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &741068801
 MonoBehaviour:
@@ -3352,7 +3368,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2839635525098583776, guid: 3c4ad0c6d7fd40e40961edbddc9fe8b8, type: 3}
+  m_Sprite: {fileID: 7930265040436356065, guid: 6d71b9c4a57d9474fa3ce88be38c19da, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4129,7 +4145,7 @@ GameObject:
   - component: {fileID: 909353506}
   - component: {fileID: 909353505}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Guard(Base)Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4152,7 +4168,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -2.1}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 44, y: 44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &909353505
 MonoBehaviour:
@@ -4174,7 +4190,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2839635525098583776, guid: 3c4ad0c6d7fd40e40961edbddc9fe8b8, type: 3}
+  m_Sprite: {fileID: -2888910892671834253, guid: afb1f064eb1d0114585b7c90067238eb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4513,7 +4529,7 @@ GameObject:
   - component: {fileID: 1068613871}
   - component: {fileID: 1068613870}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Blade(Base)Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4536,7 +4552,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -2.1}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 44, y: 44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1068613870
 MonoBehaviour:
@@ -4558,7 +4574,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2839635525098583776, guid: 3c4ad0c6d7fd40e40961edbddc9fe8b8, type: 3}
+  m_Sprite: {fileID: 8843455131728870980, guid: e24e3be2a198b634ea6146280e424645, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5111,6 +5127,12 @@ MonoBehaviour:
   hiltSlider: {fileID: 677291994}
   guardSlider: {fileID: 486373743}
   bladeSlider: {fileID: 1676046469}
+  selectedHiltSlot: {fileID: 741068801}
+  selectedGuardSlot: {fileID: 909353505}
+  selectedBladeSlot: {fileID: 1068613870}
+  selectedHilt: {fileID: 0}
+  selectedGuard: {fileID: 0}
+  selectedBlade: {fileID: 0}
 --- !u!1 &1372324924
 GameObject:
   m_ObjectHideFlags: 0

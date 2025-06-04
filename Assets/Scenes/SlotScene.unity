@@ -1237,6 +1237,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 643805308}
+  floatingTextPrefab: {fileID: 0}
+  floatDistance: 50
+  floatDuration: 1
   defaultCoins: 100
 --- !u!114 &643805308 stripped
 MonoBehaviour:
@@ -2218,7 +2221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1428362312
 AudioSource:
   m_ObjectHideFlags: 0

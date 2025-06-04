@@ -26,21 +26,32 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(SwordPart item)
     {
-        if (item != null && inventory.Count < maxSlots)
+        if (item == null)
         {
-            inventory.Add(item);
-            Debug.Log("Added item: " + item.partName);
-
-            SaveInventory();
-
-            InventoryUI ui = Object.FindFirstObjectByType<InventoryUI>();
-            if (ui != null)
-                ui.RefreshUI();
+            Debug.LogWarning("Tried to add a null item.");
+            return;
         }
-        else
+
+        if (inventory.Count >= maxSlots)
         {
-            Debug.LogWarning("Inventory full or item is null");
+            Debug.LogWarning("Inventory is full; cannot add: " + item.partName);
+            return;
         }
+
+        if (inventory.Exists(x => x.partName == item.partName))
+        {
+            Debug.LogWarning("Item already in inventory: " + item.partName);
+            return;
+        }
+
+        inventory.Add(item);
+        Debug.Log("Added item: " + item.partName);
+
+        SaveInventory();
+
+        InventoryUI ui = Object.FindFirstObjectByType<InventoryUI>();
+        if (ui != null)
+            ui.RefreshUI();
     }
 
     void SaveInventory()

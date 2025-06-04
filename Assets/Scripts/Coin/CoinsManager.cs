@@ -18,7 +18,7 @@ public class CoinManager : MonoBehaviour
 
     [Header("Settings")]
     [Tooltip("Quantas moedas o jogador começa quando entra no jogo")]
-    public int defaultCoins = 0;
+    public int defaultCoins = 123;
 
     private int coins;
     public int Coins => coins;

@@ -20,10 +20,13 @@ public class RouletteSpin : MonoBehaviour
     public Image rewardedItemSlot;
 
     public Button spinButton;
+    public Button acceptButton;
 
     [Header("References")]
-    public Transform itemPicker;  // This rotates around the wheel
-    public Transform wheelCenter; // Center point of the wheel (should be this.transform or assigned)
+    public Transform itemPicker; 
+    public Transform wheelCenter;
+
+    public AnimationController1 animationController;
 
     void Start()
     {
@@ -33,6 +36,9 @@ public class RouletteSpin : MonoBehaviour
             c.a = 0f;
             rewardedItemSlot.color = c;
         }
+
+        if (acceptButton != null)
+            acceptButton.interactable = false;
     }
     public void StartSpin()
     {
@@ -122,6 +128,10 @@ public class RouletteSpin : MonoBehaviour
                 rewardedItemSlot.color = c;
 
                 waitingForDecision = true;
+
+                if (acceptButton != null)
+                    acceptButton.interactable = true;
+
                 if (spinButton != null)
                     spinButton.interactable = false;
             }
@@ -131,6 +141,7 @@ public class RouletteSpin : MonoBehaviour
     public void OnPlayerDecided()
     {
         waitingForDecision = false;
+
         if (spinButton != null )
             spinButton.interactable = true;
     }
@@ -138,11 +149,45 @@ public class RouletteSpin : MonoBehaviour
     {
         if (selectedItem != null && InventoryManager.Instance != null)
         {
+            // 1) Try adding to inventory (will skip if duplicate or full)
             InventoryManager.Instance.AddItem(selectedItem);
+
+            // 2) Immediately block Accept so extra clicks do nothing
+            if (acceptButton != null)
+                acceptButton.interactable = false;
+
+            // 3) Kick off your existing bag+star animation
+            animationController.PlayKeepAnimation();
+
+            // 4) Calculate how long the animation runs in total:
+            float totalAnimTime =
+                animationController.bagEnterDuration
+                + animationController.itemFlyDuration
+                + 0.5f                      // your hard?coded shrinkDuration 
+                + (animationController.starBlinkDuration * 2f);
+
+            // 5) Wait exactly that long, then clear and re?enable UI
+            StartCoroutine(WaitForAnimationEnd(totalAnimTime));
         }
+        else
+        {
+            // If for some reason there was no selectedItem, just reset UI immediately
+            OnPlayerDecided();
+        }
+    }
+
+    private IEnumerator WaitForAnimationEnd(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        ClearRewardSlot();
+
+        if (acceptButton != null)
+            acceptButton.interactable = false;
 
         OnPlayerDecided();
     }
+
     public void OnReject()
     {
         ClearRewardSlot();

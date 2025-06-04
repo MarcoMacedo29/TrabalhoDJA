@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public Image[] slotImages; 
+    public Image[] slotImages;
     public Sprite emptySlotSprite;
 
     public static InventoryUI Instance;

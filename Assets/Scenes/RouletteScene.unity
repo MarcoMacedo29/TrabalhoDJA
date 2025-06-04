@@ -350,18 +350,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 768280195}
-        m_TargetAssemblyTypeName: AnimationController1, Assembly-CSharp
-        m_MethodName: PlayKeepAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &56979034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -962,8 +950,10 @@ MonoBehaviour:
   selectedItem: {fileID: 0}
   rewardedItemSlot: {fileID: 143328066}
   spinButton: {fileID: 1236363992}
+  acceptButton: {fileID: 56979033}
   itemPicker: {fileID: 1038716430}
   wheelCenter: {fileID: 309934755}
+  animationController: {fileID: 768280195}
 --- !u!1 &333423916
 GameObject:
   m_ObjectHideFlags: 0
@@ -3487,6 +3477,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1196127450}
     m_Modifications:
+    - target: {fileID: 1086608760865917163, guid: ef6a4c5df04687e4380e501ba5c1d78b, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3809768332448974358, guid: ef6a4c5df04687e4380e501ba5c1d78b, type: 3}
       propertyPath: m_Name
       value: FloatingTextPrefab
