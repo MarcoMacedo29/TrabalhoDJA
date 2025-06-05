@@ -6,6 +6,11 @@ public class InventoryUI : MonoBehaviour
     public Image[] slotImages;
     public Sprite emptySlotSprite;
 
+    [Range(0f, 1f)]
+    public float emptySlotAlpha = 184f / 255f;
+
+    public Vector2 emptySlotSize = new Vector2(64f, 64f);
+
     public static InventoryUI Instance;
 
     private void Awake()
@@ -37,9 +42,9 @@ public class InventoryUI : MonoBehaviour
                 slotImages[i].sprite = emptySlotSprite;
 
                 // Keep the alpha from the placeholder setup
-                Color originalColor = slotImages[i].color;
-                slotImages[i].color = new Color(1f, 1f, 1f, originalColor.a);
 
+                slotImages[i].color = new Color(1f, 1f, 1f, emptySlotAlpha);
+                rt.sizeDelta = emptySlotSize; // now 64×64
             }
         }
     }

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class RouletteSpin : MonoBehaviour
-{
+{   
     private bool isSpinning = false;
     private bool waitingForDecision = false;
 

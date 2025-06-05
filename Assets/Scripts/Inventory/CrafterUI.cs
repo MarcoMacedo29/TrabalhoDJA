@@ -17,7 +17,7 @@ public class CrafterUI : MonoBehaviour
     public GameObject guardSlider;
     public GameObject bladeSlider;
 
-    [Header("UI References for Selected Slots")]
+    [Header("UI References for Selected Slots (in your crafting panel)")]
     [Tooltip("Where the chosen Hilt ends up")]
     public Image selectedHiltSlot;
     [Tooltip("Where the chosen Guard ends up")]
@@ -32,21 +32,41 @@ public class CrafterUI : MonoBehaviour
 
     [Header("Merge Offsets (tweak these so blade/guard/hilt line up)")]
     [Tooltip("Relative to guardSlot, where should the blade sprite be placed?")]
-    public Vector2 bladeMergeOffset = new Vector2(0, +80f);
+    public Vector2 bladeMergeOffset = new Vector2(0f, +80f);
     [Tooltip("Relative to guardSlot, where should the hilt sprite be placed?")]
-    public Vector2 hiltMergeOffset = new Vector2(0, -80f);
+    public Vector2 hiltMergeOffset = new Vector2(0f, -80f);
 
-    // Duration (in seconds) of the merge transition for blade & hilt
-    private float mergeDuration = 0.35f;
+    [Header("Outside Container for Shrinking")]
+    [Tooltip("An empty RectTransform under your Canvas; we'll reparent the three slots here during the shrink.")]
+    public RectTransform outsideContainer;
+
+    public GameObject swordInventorySlot;
+
+    // Durations (in seconds)
+    private float mergeDuration = 0.55f;
+    private float shrinkDuration = 0.7f;
+
+    // We’ll store each slot’s original parent, so we can reparent them back:
+    private Transform origHiltParent;
+    private Transform origGuardParent;
+    private Transform origBladeParent;
+
+    private Canvas rootCanvas;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        // Find the root Canvas for coordinate conversions
+        rootCanvas = GetComponentInParent<Canvas>();
+        if (rootCanvas == null)
+            Debug.LogError("CrafterUI: No Canvas found in parents. Make sure this script sits under a Canvas.");
     }
 
     private void Start()
     {
+        // Hide all sliders at start
         hiltSlider.SetActive(false);
         guardSlider.SetActive(false);
         bladeSlider.SetActive(false);
@@ -74,15 +94,13 @@ public class CrafterUI : MonoBehaviour
     public void RefreshPartImages(PartSlotImage[] partImages)
     {
         var inventory = InventoryManager.Instance.inventory;
-
         foreach (var partImg in partImages)
         {
             bool owned = false;
             if (partImg.swordPart != null && inventory != null)
             {
                 bool inInventory = inventory.Exists(item =>
-                    item != null &&
-                    item.partName == partImg.swordPart.partName);
+                    item != null && item.partName == partImg.swordPart.partName);
 
                 bool alreadySelected = false;
                 if (partImg.swordPart.partType == SwordPartType.Hilt)
@@ -95,7 +113,6 @@ public class CrafterUI : MonoBehaviour
                 // Show “owned” only if in inventory and not already placed in a craft slot
                 owned = inInventory && !alreadySelected;
             }
-
             partImg.UpdateVisual(owned);
         }
     }
@@ -122,15 +139,14 @@ public class CrafterUI : MonoBehaviour
         }
         if (destSlot == null) return;
 
-        // Animate the flying clone into the crafting slot
+        // Animate the flying clone into the crafting slot, as before
         StartCoroutine(AnimatePartMove(clicked.GetComponent<Image>(), destSlot, clicked.swordPart.sprite));
-
-        // Immediately fade out that slot in the slider
         RefreshAllPartImages();
     }
 
     private IEnumerator AnimatePartMove(Image source, Image destination, Sprite finalSprite)
     {
+        // Instantiate a flying copy under the same parent, then reparent it to the root Canvas
         Image fly = Instantiate(source, source.transform.parent);
         fly.transform.SetAsLastSibling();
         fly.raycastTarget = false;
@@ -139,17 +155,13 @@ public class CrafterUI : MonoBehaviour
         RectTransform srcRT = source.rectTransform;
         RectTransform dstRT = destination.rectTransform;
 
-        Canvas rootCanvas = fly.canvas.rootCanvas;
+        // Convert source world ? canvas local point
         Vector2 srcPos, dstPos;
-
-        // Convert source world?canvas?local
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             rootCanvas.transform as RectTransform,
             RectTransformUtility.WorldToScreenPoint(null, srcRT.position),
             rootCanvas.worldCamera,
             out srcPos);
-
-        // Convert destination world?canvas?local
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             rootCanvas.transform as RectTransform,
             RectTransformUtility.WorldToScreenPoint(null, dstRT.position),
@@ -163,19 +175,21 @@ public class CrafterUI : MonoBehaviour
         while (t < mergeDuration)
         {
             t += Time.unscaledDeltaTime;
-            float p = Mathf.SmoothStep(0, 1, t / mergeDuration);
+            float p = Mathf.SmoothStep(0f, 1f, t / mergeDuration);
             flyRT.anchoredPosition = Vector2.Lerp(srcPos, dstPos, p);
             flyRT.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 0.8f, p);
             yield return null;
         }
 
+        // Once it lands, set the real slot’s sprite & destroy the flying copy
         destination.sprite = finalSprite;
         destination.color = Color.white;
         Destroy(fly.gameObject);
     }
 
     /// <summary>
-    /// Called by the hammer Button. Plays a transition to move blade & hilt onto guard, then consumes parts.
+    /// Called by the merge button. Animates blade & hilt ? guard, then moves all three slot?Images into
+    /// an outside container, shrinks that container, then re?parents back—keeping each slot’s own sprite.
     /// </summary>
     public void CraftAndMerge()
     {
@@ -186,15 +200,14 @@ public class CrafterUI : MonoBehaviour
             return;
         }
 
-        // 2) Assign the guard sprite immediately (no need to move it)
+        // 2) Immediately set the guard slot’s sprite
         if (selectedGuardSlot != null)
         {
             selectedGuardSlot.sprite = selectedGuard.sprite;
             selectedGuardSlot.color = Color.white;
         }
 
-        // 3) Prepare blade & hilt at their slots, then animate them into merged positions
-        //    (a) Set their sprites & make them visible
+        // 3) Set blade & hilt slot sprites & make them visible
         if (selectedBladeSlot != null)
         {
             selectedBladeSlot.sprite = selectedBlade.sprite;
@@ -206,28 +219,26 @@ public class CrafterUI : MonoBehaviour
             selectedHiltSlot.color = Color.white;
         }
 
-        // (b) Compute target anchoredPositions for blade and hilt relative to guard
+        // 4) Animate blade ? guard, and hilt ? guard
         RectTransform guardRT = selectedGuardSlot.rectTransform;
         Vector2 guardAnchored = guardRT.anchoredPosition;
-
         Vector2 bladeTarget = guardAnchored + bladeMergeOffset;
         Vector2 hiltTarget = guardAnchored + hiltMergeOffset;
 
-        // (c) Start coroutines to animate each part from its current slot to the merged target
         if (selectedBladeSlot != null)
-            StartCoroutine(AnimateMergeMove(selectedBladeSlot, bladeTarget));
+            StartCoroutine(AnimateMergeMoveSlot(selectedBladeSlot, bladeTarget));
 
         if (selectedHiltSlot != null)
-            StartCoroutine(AnimateMergeMove(selectedHiltSlot, hiltTarget));
+            StartCoroutine(AnimateMergeMoveSlot(selectedHiltSlot, hiltTarget));
 
-        // 4) After mergeDuration, consume the parts from inventory and clear selection
-        StartCoroutine(ConsumeAfterDelay(mergeDuration));
+        // 5) After mergeDuration, begin the “reparent?to?outsideContainer & shrink” sequence
+        StartCoroutine(ReparentAndShrinkRoutine());
     }
 
     /// <summary>
-    /// Animates a single part's Image from its current anchoredPosition to the target anchoredPosition.
+    /// Moves a slot?Image’s RectTransform from its current anchoredPosition ? targetAnchored over mergeDuration.
     /// </summary>
-    private IEnumerator AnimateMergeMove(Image partImage, Vector2 targetAnchoredPos)
+    private IEnumerator AnimateMergeMoveSlot(Image partImage, Vector2 targetAnchoredPos)
     {
         RectTransform rt = partImage.rectTransform;
         Vector2 startAnchored = rt.anchoredPosition;
@@ -236,7 +247,7 @@ public class CrafterUI : MonoBehaviour
         while (t < mergeDuration)
         {
             t += Time.unscaledDeltaTime;
-            float p = Mathf.SmoothStep(0, 1, t / mergeDuration);
+            float p = Mathf.SmoothStep(0f, 1f, t / mergeDuration);
             rt.anchoredPosition = Vector2.Lerp(startAnchored, targetAnchoredPos, p);
             yield return null;
         }
@@ -245,23 +256,150 @@ public class CrafterUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Waits for the merge animation to finish, then removes the parts from inventory and updates UI.
+    /// 1) Waits for mergeDuration real?seconds  
+    /// 2) Stores each slot’s original parent  
+    /// 3) Reparents all three into outsideContainer (preserving their on-screen positions)  
+    /// 4) Shrinks outsideContainer ? zero over shrinkDuration real-seconds  
+    /// 5) Reparents each slot back to its original parent, sets anchoredPosition=(0,0), scale=1, keeps its own sprite  
+    /// 6) Removes parts from inventory, clears selection, refreshes UI  
     /// </summary>
-    private IEnumerator ConsumeAfterDelay(float delay)
+    private IEnumerator ReparentAndShrinkRoutine()
     {
-        yield return new WaitForSeconds(delay);
+        // 1) Wait for the blade/hilt?onto?guard animations to finish
+        yield return new WaitForSecondsRealtime(mergeDuration);
 
-        // Remove chosen parts from inventory so they cannot be used again
+        // 2) Capture original parents
+        origHiltParent = selectedHiltSlot.transform.parent;
+        origGuardParent = selectedGuardSlot.transform.parent;
+        origBladeParent = selectedBladeSlot.transform.parent;
+
+        // 3) Reparent each slot?Image into outsideContainer,
+        //    preserving their on-screen (canvas) positions
+        ReparentToContainerPreservingPosition(selectedHiltSlot, outsideContainer);
+        ReparentToContainerPreservingPosition(selectedGuardSlot, outsideContainer);
+        ReparentToContainerPreservingPosition(selectedBladeSlot, outsideContainer);
+
+        // 4) Shrink outsideContainer over shrinkDuration (real time)
+        Vector3 startScale = outsideContainer.localScale;
+        Vector3 targetScale = Vector3.zero;
+        float t = 0f;
+
+        while (t < shrinkDuration)
+        {
+            t += Time.unscaledDeltaTime;
+            float p = Mathf.SmoothStep(0f, 1f, t / shrinkDuration);
+            outsideContainer.localScale = Vector3.Lerp(startScale, targetScale, p);
+            yield return null;
+        }
+        outsideContainer.localScale = targetScale;
+
+        var craftedHilt = selectedHilt;
+        var craftedGuard = selectedGuard;
+        var craftedBlade = selectedBlade;
+
+        // 5) Reparent each slot back to its original parent,
+        //    set anchoredPosition = (0,0), localScale = (1,1,1), and keep each slot’s own sprite
+        RestoreAndRepositionPreservingSprite(
+            selectedHiltSlot,
+            origHiltParent,
+            selectedHiltSlot.sprite
+        );
+        RestoreAndRepositionPreservingSprite(
+            selectedGuardSlot,
+            origGuardParent,
+            selectedGuardSlot.sprite
+        );
+        RestoreAndRepositionPreservingSprite(
+            selectedBladeSlot,
+            origBladeParent,
+            selectedBladeSlot.sprite
+        );
+
+        // Reset outsideContainer’s scale so it’s ready for next time
+        outsideContainer.localScale = Vector3.one;
+
+        UpdateSwordInventorySlotDisplay(craftedHilt, craftedGuard, craftedBlade);
+
+        // 6) Consume the parts from inventory, clear selection, refresh UI
         InventoryManager.Instance.inventory.Remove(selectedHilt);
         InventoryManager.Instance.inventory.Remove(selectedGuard);
         InventoryManager.Instance.inventory.Remove(selectedBlade);
 
-        // Clear the selection references
+        InventoryUI.Instance.RefreshUI();
+
         selectedHilt = null;
         selectedGuard = null;
         selectedBlade = null;
 
-        // Refresh sliders so those parts no longer appear as owned
         RefreshAllPartImages();
+    }
+
+    /// <summary>
+    /// Reparents slotImg under originalParent. Then:
+    ///   - rectTransform.anchoredPosition = (0,0)
+    ///   - rectTransform.localScale = (1,1,1)
+    ///   - slotImg.sprite is left unchanged (preserving each slot’s own part sprite)
+    /// </summary>
+    private void RestoreAndRepositionPreservingSprite(Image slotImg, Transform originalParent, Sprite originalSprite)
+    {
+        RectTransform rt = slotImg.rectTransform;
+        rt.SetParent(originalParent, false);
+        rt.anchoredPosition = Vector2.zero;
+        rt.localScale = Vector3.one;
+
+        slotImg.sprite = originalSprite;
+        slotImg.color = Color.white;
+    }
+
+    /// <summary>
+    /// Reparents slotImg under newParent (outsideContainer) while preserving its on-screen position.
+    /// </summary>
+    private void ReparentToContainerPreservingPosition(Image slotImg, RectTransform newParent)
+    {
+        RectTransform rt = slotImg.rectTransform;
+
+        // 1) Get the slot’s screen point
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(null, rt.position);
+
+        // 2) Convert that screen point to newParent’s local coordinates
+        Vector2 newAnchored;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            newParent,
+            screenPoint,
+            rootCanvas.worldCamera,
+            out newAnchored);
+
+        // 3) Reparent (worldPositionStays = false), then set the anchoredPosition to match
+        rt.SetParent(newParent, false);
+        rt.anchoredPosition = newAnchored;
+    }
+
+    private void UpdateSwordInventorySlotDisplay(SwordPart hiltPart, SwordPart guardPart, SwordPart bladePart)
+    {
+        if (swordInventorySlot == null) return;
+
+        Transform hilt = swordInventorySlot.transform.Find("ItemButton/Sword/Hilt");
+        Transform guard = swordInventorySlot.transform.Find("ItemButton/Sword/Guard");
+        Transform blade = swordInventorySlot.transform.Find("ItemButton/Sword/Blade");
+
+        if (hilt != null && hiltPart != null)
+            hilt.GetComponent<Image>().sprite = hiltPart.sprite;
+
+        if (guard != null && guardPart != null)
+            guard.GetComponent<Image>().sprite = guardPart.sprite;
+
+        if (blade != null && bladePart != null)
+            blade.GetComponent<Image>().sprite = bladePart.sprite;
+
+        float defaultAlpha = 1f;
+        foreach (var img in new[] { hilt, guard, blade })
+        {
+            if (img != null)
+            {
+                var image = img.GetComponent<Image>();
+                var c = image.color;
+                image.color = new Color(c.r, c.g, c.b, defaultAlpha);
+            }
+        }
     }
 }
