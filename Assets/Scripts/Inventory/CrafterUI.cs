@@ -42,6 +42,15 @@ public class CrafterUI : MonoBehaviour
 
     public GameObject swordInventorySlot;
 
+    [Header("Scene Sword Renderer")]
+    public SceneSwordDisplay sceneSwordDisplay;
+
+    [Header("Scene Sword")]
+    public SwordAssembler sceneSwordAssembler;
+
+    [Header("Crafting Button")]
+    public Button hammerButton;
+
     // Durations (in seconds)
     private float mergeDuration = 0.55f;
     private float shrinkDuration = 0.7f;
@@ -193,6 +202,9 @@ public class CrafterUI : MonoBehaviour
     /// </summary>
     public void CraftAndMerge()
     {
+        if (hammerButton != null)
+            hammerButton.interactable = false;
+
         // 1) Ensure all three parts are chosen
         if (selectedHilt == null || selectedGuard == null || selectedBlade == null)
         {
@@ -320,6 +332,16 @@ public class CrafterUI : MonoBehaviour
 
         UpdateSwordInventorySlotDisplay(craftedHilt, craftedGuard, craftedBlade);
 
+        if (sceneSwordDisplay != null)
+        {
+            sceneSwordDisplay.SetSwordParts(craftedHilt, craftedGuard, craftedBlade);
+        }
+
+        if (sceneSwordAssembler != null)
+        {
+            sceneSwordAssembler.SetCraftedParts(craftedHilt, craftedGuard, craftedBlade);
+        }
+
         // 6) Consume the parts from inventory, clear selection, refresh UI
         InventoryManager.Instance.inventory.Remove(selectedHilt);
         InventoryManager.Instance.inventory.Remove(selectedGuard);
@@ -332,6 +354,9 @@ public class CrafterUI : MonoBehaviour
         selectedBlade = null;
 
         RefreshAllPartImages();
+
+        if (hammerButton != null)
+            hammerButton.interactable = true;
     }
 
     /// <summary>
@@ -374,32 +399,32 @@ public class CrafterUI : MonoBehaviour
         rt.anchoredPosition = newAnchored;
     }
 
-    private void UpdateSwordInventorySlotDisplay(SwordPart hiltPart, SwordPart guardPart, SwordPart bladePart)
+   private void UpdateSwordInventorySlotDisplay(SwordPart hiltPart, SwordPart guardPart, SwordPart bladePart)
+{
+    if (swordInventorySlot == null) return;
+
+    Transform hilt = swordInventorySlot.transform.Find("ItemButton/Sword/Hilt");
+    Transform guard = swordInventorySlot.transform.Find("ItemButton/Sword/Guard");
+    Transform blade = swordInventorySlot.transform.Find("ItemButton/Sword/Blade");
+
+    if (hilt != null && hiltPart != null)
+        hilt.GetComponent<Image>().sprite = hiltPart.sprite;
+
+    if (guard != null && guardPart != null)
+        guard.GetComponent<Image>().sprite = guardPart.sprite;
+
+    if (blade != null && bladePart != null)
+        blade.GetComponent<Image>().sprite = bladePart.sprite;
+
+    float defaultAlpha = 1f;
+    foreach (var img in new[] { hilt, guard, blade })
     {
-        if (swordInventorySlot == null) return;
-
-        Transform hilt = swordInventorySlot.transform.Find("ItemButton/Sword/Hilt");
-        Transform guard = swordInventorySlot.transform.Find("ItemButton/Sword/Guard");
-        Transform blade = swordInventorySlot.transform.Find("ItemButton/Sword/Blade");
-
-        if (hilt != null && hiltPart != null)
-            hilt.GetComponent<Image>().sprite = hiltPart.sprite;
-
-        if (guard != null && guardPart != null)
-            guard.GetComponent<Image>().sprite = guardPart.sprite;
-
-        if (blade != null && bladePart != null)
-            blade.GetComponent<Image>().sprite = bladePart.sprite;
-
-        float defaultAlpha = 1f;
-        foreach (var img in new[] { hilt, guard, blade })
+        if (img != null)
         {
-            if (img != null)
-            {
-                var image = img.GetComponent<Image>();
-                var c = image.color;
-                image.color = new Color(c.r, c.g, c.b, defaultAlpha);
-            }
+            var image = img.GetComponent<Image>();
+            var c = image.color;
+            image.color = new Color(c.r, c.g, c.b, defaultAlpha);
         }
     }
+}
 }

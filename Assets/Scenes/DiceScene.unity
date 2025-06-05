@@ -434,17 +434,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 87909050}
   m_CullTransparentMesh: 1
---- !u!114 &239514676 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1189811733332923547, guid: d4cf4f06f8eca02479879337231421a0, type: 3}
-  m_PrefabInstance: {fileID: 1913968395}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &251879528 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 570887289795872841, guid: daf55ee3e7c10594a954c2d7fb6493b0, type: 3}
@@ -579,11 +568,6 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1123663710099210993, guid: daf55ee3e7c10594a954c2d7fb6493b0, type: 3}
   m_PrefabInstance: {fileID: 294111114}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &329685337 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8920028963874129693, guid: d4cf4f06f8eca02479879337231421a0, type: 3}
-  m_PrefabInstance: {fileID: 1913968395}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &493570372
 GameObject:
@@ -1606,11 +1590,6 @@ MonoBehaviour:
   maxSpinIterations: 15
   baseInterval: 0.05
   intervalJitter: 0.02
---- !u!1 &1266553635 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3809768332448974358, guid: ef6a4c5df04687e4380e501ba5c1d78b, type: 3}
-  m_PrefabInstance: {fileID: 4148007218307922818}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1266553637 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4071179411295527804, guid: ef6a4c5df04687e4380e501ba5c1d78b, type: 3}
@@ -2916,33 +2895,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8920028963874129693, guid: d4cf4f06f8eca02479879337231421a0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1913968399}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4cf4f06f8eca02479879337231421a0, type: 3}
 --- !u!224 &1913968396 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5211415494601562875, guid: d4cf4f06f8eca02479879337231421a0, type: 3}
   m_PrefabInstance: {fileID: 1913968395}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1913968399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 329685337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b90583a86a0dd6f4dac7e8b780671d20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinText: {fileID: 239514676}
-  floatingTextPrefab: {fileID: 1266553635}
-  floatDistance: 50
-  floatDuration: 1
-  defaultCoins: 0
 --- !u!1 &1922553648
 GameObject:
   m_ObjectHideFlags: 0

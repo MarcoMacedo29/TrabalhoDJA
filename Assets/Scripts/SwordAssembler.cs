@@ -39,4 +39,14 @@ public class SwordAssembler : MonoBehaviour
         }
 
     }
+
+    public void SetCraftedParts(SwordPart hilt, SwordPart guard, SwordPart blade)
+    {
+
+        this.hilt = hilt;
+        this.guard = guard;
+        this.blade = blade;
+
+        Recalculate();
+    }
 }
