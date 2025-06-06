@@ -54,7 +54,7 @@ public class CrafterUI : MonoBehaviour
     private bool isCrafting = false;
 
     // Durations (in seconds)
-    private float mergeDuration = 0.55f;
+    private float mergeDuration = 0.6f;
     private float shrinkDuration = 0.7f;
 
     // We’ll store each slot’s original parent, so we can reparent them back:
