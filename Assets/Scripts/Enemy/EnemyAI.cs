@@ -13,7 +13,6 @@ public class EnemyAI : MonoBehaviour
             target = player.transform;
         }
     }
-    // Torná-los mais dispersos
     private void Update()
     {
         if (target == null) return;

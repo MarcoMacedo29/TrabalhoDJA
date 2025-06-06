@@ -1218,7 +1218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8111593159487173597, guid: adf62212de0dc124c8665ac896ccde03, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8245535862346223582, guid: adf62212de0dc124c8665ac896ccde03, type: 3}
       propertyPath: m_Name
@@ -1858,7 +1858,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.8627451}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -5211,6 +5211,7 @@ MonoBehaviour:
   swordInventorySlot: {fileID: 558032707}
   sceneSwordDisplay: {fileID: 1818570606}
   sceneSwordAssembler: {fileID: 478908801}
+  hammerButton: {fileID: 379181045}
 --- !u!1 &1372324924
 GameObject:
   m_ObjectHideFlags: 0

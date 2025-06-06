@@ -58,7 +58,6 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPosition = transform.position + (Random.onUnitSphere * spawnRadius);
         spawnPosition.y = 0;
 
-        // FIX: Use the prefab’s original rotation
         Instantiate(enemyPrefab, spawnPosition, enemyPrefab.transform.rotation);
 
         totalEnemiesSpawned++;

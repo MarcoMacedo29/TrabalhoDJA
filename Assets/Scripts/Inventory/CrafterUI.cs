@@ -51,6 +51,8 @@ public class CrafterUI : MonoBehaviour
     [Header("Crafting Button")]
     public Button hammerButton;
 
+    private bool isCrafting = false;
+
     // Durations (in seconds)
     private float mergeDuration = 0.55f;
     private float shrinkDuration = 0.7f;
@@ -81,6 +83,7 @@ public class CrafterUI : MonoBehaviour
         bladeSlider.SetActive(false);
 
         RefreshAllPartImages();
+        RefreshCraftButton();
     }
 
     public void ToggleSlider(GameObject targetSlider)
@@ -151,6 +154,7 @@ public class CrafterUI : MonoBehaviour
         // Animate the flying clone into the crafting slot, as before
         StartCoroutine(AnimatePartMove(clicked.GetComponent<Image>(), destSlot, clicked.swordPart.sprite));
         RefreshAllPartImages();
+        RefreshCraftButton();
     }
 
     private IEnumerator AnimatePartMove(Image source, Image destination, Sprite finalSprite)
@@ -202,6 +206,9 @@ public class CrafterUI : MonoBehaviour
     /// </summary>
     public void CraftAndMerge()
     {
+        if (isCrafting)
+            return;
+
         if (hammerButton != null)
             hammerButton.interactable = false;
 
@@ -209,6 +216,8 @@ public class CrafterUI : MonoBehaviour
         if (selectedHilt == null || selectedGuard == null || selectedBlade == null)
         {
             Debug.LogWarning("You must select a Hilt, Guard, and Blade before crafting!");
+            isCrafting = false;
+            RefreshCraftButton();
             return;
         }
 
@@ -354,9 +363,8 @@ public class CrafterUI : MonoBehaviour
         selectedBlade = null;
 
         RefreshAllPartImages();
-
-        if (hammerButton != null)
-            hammerButton.interactable = true;
+        isCrafting = false;
+        RefreshCraftButton();
     }
 
     /// <summary>
@@ -399,32 +407,43 @@ public class CrafterUI : MonoBehaviour
         rt.anchoredPosition = newAnchored;
     }
 
-   private void UpdateSwordInventorySlotDisplay(SwordPart hiltPart, SwordPart guardPart, SwordPart bladePart)
-{
-    if (swordInventorySlot == null) return;
-
-    Transform hilt = swordInventorySlot.transform.Find("ItemButton/Sword/Hilt");
-    Transform guard = swordInventorySlot.transform.Find("ItemButton/Sword/Guard");
-    Transform blade = swordInventorySlot.transform.Find("ItemButton/Sword/Blade");
-
-    if (hilt != null && hiltPart != null)
-        hilt.GetComponent<Image>().sprite = hiltPart.sprite;
-
-    if (guard != null && guardPart != null)
-        guard.GetComponent<Image>().sprite = guardPart.sprite;
-
-    if (blade != null && bladePart != null)
-        blade.GetComponent<Image>().sprite = bladePart.sprite;
-
-    float defaultAlpha = 1f;
-    foreach (var img in new[] { hilt, guard, blade })
+    private void UpdateSwordInventorySlotDisplay(SwordPart hiltPart, SwordPart guardPart, SwordPart bladePart)
     {
-        if (img != null)
+        if (swordInventorySlot == null) return;
+
+        Transform hilt = swordInventorySlot.transform.Find("ItemButton/Sword/Hilt");
+        Transform guard = swordInventorySlot.transform.Find("ItemButton/Sword/Guard");
+        Transform blade = swordInventorySlot.transform.Find("ItemButton/Sword/Blade");
+
+        if (hilt != null && hiltPart != null)
+            hilt.GetComponent<Image>().sprite = hiltPart.sprite;
+
+        if (guard != null && guardPart != null)
+            guard.GetComponent<Image>().sprite = guardPart.sprite;
+
+        if (blade != null && bladePart != null)
+            blade.GetComponent<Image>().sprite = bladePart.sprite;
+
+        float defaultAlpha = 1f;
+        foreach (var img in new[] { hilt, guard, blade })
         {
-            var image = img.GetComponent<Image>();
-            var c = image.color;
-            image.color = new Color(c.r, c.g, c.b, defaultAlpha);
+            if (img != null)
+            {
+                var image = img.GetComponent<Image>();
+                var c = image.color;
+                image.color = new Color(c.r, c.g, c.b, defaultAlpha);
+            }
         }
     }
-}
+
+    private void RefreshCraftButton()
+    {
+        bool allSelected = (selectedHilt != null && selectedGuard != null && selectedBlade != null);
+        bool canClick = allSelected && !isCrafting;
+
+        if (hammerButton != null)
+            hammerButton.interactable = canClick;
+
+    }
+
 }

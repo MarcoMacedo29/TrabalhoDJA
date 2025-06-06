@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
     public void Die()
     {
         Debug.Log("Player foi destruído!");
