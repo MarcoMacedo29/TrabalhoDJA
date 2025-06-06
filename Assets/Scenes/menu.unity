@@ -164,11 +164,11 @@ AudioSource:
   m_GameObject: {fileID: 103889041}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4940837651357482073, guid: 4473d4f9db04f7d41b3690f5c1d5000c, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.35
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -949,7 +949,7 @@ MonoBehaviour:
   Main: {fileID: 1723114891}
   sfx1: {fileID: 8300000, guid: 0955d4ac04b72544394e043b577b21ce, type: 3}
   sfx2: {fileID: 0}
-  backgroundmusic: {fileID: 0}
+  backgroundmusic: {fileID: 8300000, guid: 374bc852d23440644a3ada9407795d2a, type: 3}
 --- !u!1 &568920760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,6 +1095,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 575883686}
+  - component: {fileID: 575883687}
   m_Layer: 5
   m_Name: Volumes
   m_TagString: Untagged
@@ -1114,10 +1115,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 677933040}
   - {fileID: 1443170956}
   - {fileID: 1999411746}
   - {fileID: 335848735}
+  - {fileID: 677933040}
   m_Father: {fileID: 3795212019125932490}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1125,6 +1126,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 700, y: 552.8172}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &575883687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575883685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c7df4d42abc2e145aa5aa89cb48c50a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 4473d4f9db04f7d41b3690f5c1d5000c, type: 2}
+  masterSlider: {fileID: 1999411747}
+  sfxSlider: {fileID: 677933041}
 --- !u!1 &677933039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1136,7 +1152,7 @@ GameObject:
   - component: {fileID: 677933040}
   - component: {fileID: 677933041}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: SFXSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1211,7 +1227,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.406
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1248,7 +1264,7 @@ RectTransform:
   m_Father: {fileID: 1253441403}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.406, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1523,8 +1539,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1580951494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.406, y: 0}
-  m_AnchorMax: {x: 0.406, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2137,11 +2153,11 @@ AudioSource:
   m_GameObject: {fileID: 1723114890}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8326586689287251132, guid: 4473d4f9db04f7d41b3690f5c1d5000c, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2420,8 +2436,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1709227439}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.406, y: 0}
-  m_AnchorMax: {x: 0.406, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2571,7 +2587,7 @@ RectTransform:
   m_Father: {fileID: 1200859436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.406, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2624,7 +2640,7 @@ GameObject:
   - component: {fileID: 1999411746}
   - component: {fileID: 1999411747}
   m_Layer: 5
-  m_Name: Slider (1)
+  m_Name: MasterSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2699,7 +2715,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.406
+  m_Value: 0.662
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
