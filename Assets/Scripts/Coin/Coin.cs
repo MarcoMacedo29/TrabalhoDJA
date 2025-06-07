@@ -8,7 +8,7 @@ public class Coin : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            CoinManager.Instance.AddCoins(200);
+            CoinManager.Instance.AddCoins(10);
 
             if (spawner != null)
             {
@@ -16,7 +16,7 @@ public class Coin : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Coin não tem spawner atribuído!");
+                Debug.LogWarning("Coin nï¿½o tem spawner atribuï¿½do!");
             }
 
             Destroy(gameObject);
