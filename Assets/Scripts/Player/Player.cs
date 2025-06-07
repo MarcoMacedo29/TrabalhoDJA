@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        transform.position = new Vector3(38f, 1f, -25.7f); // Y = 1 para estar acima do chÃ£o
         playerStatus = GetComponentInChildren<PlayerStatus>();
     }
 
@@ -20,8 +21,8 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("Player foi destruído!");
-        // Aqui você pode desativar, destruir o gameobject, ou o que quiser na morte
+        Debug.Log("Player foi destruï¿½do!");
+        // Aqui vocï¿½ pode desativar, destruir o gameobject, ou o que quiser na morte
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

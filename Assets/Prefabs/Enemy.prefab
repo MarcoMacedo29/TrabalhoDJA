@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1280979366649493649}
   - component: {fileID: 2089710497029960723}
   - component: {fileID: 3755734762928378172}
-  - component: {fileID: 5420522358779665044}
+  - component: {fileID: 6830341089446092414}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -100,6 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  stopDistance: 1.5
+  attackRange: 1.2
+  attackCooldown: 2
 --- !u!114 &1280979366649493649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,7 +186,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &5420522358779665044
+--- !u!95 &6830341089446092414
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -214,6 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9057298030547232105}
+  - component: {fileID: 6703741521473771000}
   m_Layer: 0
   m_Name: EnemyHealth
   m_TagString: Untagged
@@ -237,6 +241,18 @@ Transform:
   - {fileID: 5306098034231484412}
   m_Father: {fileID: 998968438496860325}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6703741521473771000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2510641778160598912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffde1f65c9d79c247ac74fec878c962e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2985376657566868114
 GameObject:
   m_ObjectHideFlags: 0
