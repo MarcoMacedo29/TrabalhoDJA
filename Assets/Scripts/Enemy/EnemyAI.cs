@@ -31,13 +31,7 @@ public class EnemyAI : MonoBehaviour
             Vector3 moveDir = direction.normalized;
             transform.position += moveDir * speed * Time.deltaTime;
 
-            // Rotação suave mantendo X = 90°
-            if (moveDir != Vector3.zero)
-            {
-                Quaternion targetRot = Quaternion.LookRotation(moveDir);
-                Quaternion fixedRot = Quaternion.Euler(90f, targetRot.eulerAngles.y, 0f);
-                transform.rotation = Quaternion.Slerp(transform.rotation, fixedRot, 5f * Time.deltaTime);
-            }
+         
         }
         else if (distance <= attackRange && Time.time > lastAttackTime + attackCooldown)
         {
