@@ -10,5 +10,5 @@ Este projeto foi desenvolvido no âmbito da disciplina de Desenvolvimento de Jog
 | **Miguel Freitas** | 29562  |
 | **Gabriel Rosas** | 27943  |
 
-# [GDD]
+# GDD
 [GDD Grupo 4 - Fatal Bet.pdf](https://github.com/user-attachments/files/20641400/GDD.Grupo.4.-.Fatal.Bet.pdf)
